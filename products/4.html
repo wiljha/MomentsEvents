@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<title>Fedora</title>
+
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+  <meta content="utf-8" http-equiv="encoding" />
+  <link rel="stylesheet" href="../styles.css" />
+  <script type="text/javascript" src="../utils.js"></script>
+  
+   <!-- GTM Datalayer init -->
+  <!-- <script>
+  window.dataLayer = window.dataLayer || []; -->
+  <!-- </script> -->
+  
+  <!-- Google Tag Manager -->
+<!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KR9DG2M');</script> -->
+<!-- End Google Tag Manager -->
+
+<script>
+  (function(e,t,n,o){e.PeopleEventsObject=o;e[o]=e[o]||{init:function(t){e[o].apiKey=t},
+  setPerson:function(t,n){e[o].person=t;e[o].personTtl=n},
+  forgetPerson:function(){e[o].toForgetPerson=true},
+  track:function(){(e[o].q=e[o].q||[]).push(arguments)},
+  updatePerson:function(t){e[o].personToUpdate={person:t}},
+  appendToList:function(t,n){e[o].attributeToAppend={attributeName:t,attribute:n}}};
+  var r=t.createElement("script");
+  var s=t.getElementsByTagName("script")[0];r.async=1;r.src=n;s.parentNode.insertBefore(r,s)})
+  (window,document,'https://s3.eu-central-1.amazonaws.com/portal-cdn-production/people-events-sdk/pe.latest-2.js','pe');
+  
+  pe.init('67b9a58c644e9b8e1e9699b56c50d80d-0589d58f-8f0c-4327-bbbc-e8e8356945bc');
+  </script>
+  
+</head>
+
+<body>
+  
+  <!-- Google Tag Manager (noscript) -->
+<!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KR9DG2M"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
+<!-- End Google Tag Manager (noscript) -->
+  
+  <header class="header">
+    <div class="fake-counter"></div>
+    <a class="delink" href="../">
+      <h1>Magic shop</h1>
+    </a>
+    <div class="counter">
+      <a class="delink" id="cart" href="../checkout.html"></a>
+    </div>
+  </header>
+  <article class="product-content">
+    <div class="product-image-container"><img class="product-image" src="../images/hat04.jpg" alt="fedora" /></div>
+    <div class="product-details">
+      <div class="product-name">Fur Felt Fedora</div>
+      <div class="product-price">$41</div>
+      <div class="product-description">Crushable Fur-Felt. This most of iconic of all 20th Century hats sports
+        double-front creases and cut rim. You will be entranced by the superb quality unlined fur-felt body ,that
+        magically retains it s shape,whatever the challenge.</div>
+      <button class="product-button-add" type="button" onclick="addToCart('fedora', 41)">
+        Add to cart
+      </button>
+    </div>
+  </article>
+  
+   <script>
+    const user = getUser();
+    // if (user && user.email) {
+    //      window.dataLayer.push({'user_id': user.email, 'event': 'login'});
+    //  }
+
+
+
+    //window.dataLayer.push({'product_name': 'Fedora', 'event': 'product_view'});
+     
+    //updateCartView('cart');
+
+    pe.setPerson({email:user.email});
+    pe.track('demoViewItem', {itemName: 'fedora', itemPrice:'41'}) // se define el evento demoViewItem en donde se hace el rastreo del artículo de interes
+    updateCartView('cart');
+     
+    async function addToCart(itemName, price) {
+      addItemToCart(itemName, price);
+      updateCartView('cart');
+      await pe.track('agregarcarrito', { item: itemName, price: price, quantity: 1 });
+    }
+
+    // function addToCart(itemName, price) {
+    //   addItemToCart(itemName, price);
+    //   updateCartView('cart');
+    //   window.dataLayer.push({'product_name': itemName, 'product_price': price, 'qty': 1, 'event': 'add_to_cart'});
+    //   console.log('Item Added to Cart');
+    // }
+  </script>
+</body>
+
+</html>
