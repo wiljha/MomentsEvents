@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<title>Magic Shop. Catalog</title>
+
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+  <meta content="utf-8" http-equiv="encoding" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <script type="text/javascript" src="utils.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+  
+  <!-- GTM Datalayer init -->
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  </script>
+  
+
+<!-- Google Tag Manager -->
+<!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MJKZ658');</script> -->
+  <!-- End Google Tag Manager -->
+
+
+  <script>
+    (function(e,t,n,o){e.PeopleEventsObject=o;e[o]=e[o]||{init:function(t){e[o].apiKey=t},
+    setPerson:function(t,n){e[o].person=t;e[o].personTtl=n},
+    forgetPerson:function(){e[o].toForgetPerson=true},
+    track:function(){(e[o].q=e[o].q||[]).push(arguments)},
+    updatePerson:function(t){e[o].personToUpdate={person:t}},
+    appendToList:function(t,n){e[o].attributeToAppend={attributeName:t,attribute:n}}};
+    var r=t.createElement("script");
+    var s=t.getElementsByTagName("script")[0];r.async=1;r.src=n;s.parentNode.insertBefore(r,s)})
+    (window,document,'https://s3.eu-central-1.amazonaws.com/portal-cdn-production/people-events-sdk/pe.latest-2.js','pe');
+    
+    pe.init('67b9a58c644e9b8e1e9699b56c50d80d-0589d58f-8f0c-4327-bbbc-e8e8356945bc');
+    </script>
+  
+
+</head>
+
+<body>
+  
+<!-- Google Tag Manager (noscript) -->
+<!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJKZ658"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
+<!-- End Google Tag Manager (noscript) -->
+  
+  <header class="header">
+    <nav>
+      <ul class="menu">
+        <li><a class="delink delink-registration" href="./registration.html">
+          <h1>Registration</h1>
+        </a></li>
+        <li>    <a class="delink delink-login" href="./login.html">
+          <h1>Login</h1>
+        </a></li>
+        <li> <a class="delink delink-logout" onclick="logout()">
+          <h1>Logout</h1>
+        </a></li>
+      </ul>
+    </nav>
+    <a class="delink" href="./">
+      <h1>Magic shop</h1>
+    </a>
+    <div class="counter">
+      <a class="delink" id="cart" href="./checkout.html"></a>
+    </div>
+  </header>
+  <article class="shop-content" id="shop">
+    <div class="items-row">
+      <div class="item-container">
+        <div class="item"><a href="./products/1.html"><img class="image" src="images/hat01.jpg" alt="tophat" /></a>
+        </div>
+        <div>$52</div>
+        <button class="button-add" type="button" onclick="addToCart('tophat', 52)">
+          Add to cart
+        </button>
+      </div>
+      <div class="item-container">
+        <div class="item"><a href="./products/2.html"><img class="image" src="images/hat02.jpg" alt="bowlhat" /></a>
+        </div>
+        <div>$47</div>
+        <button class="button-add" type="button" onclick="addToCart('bowlhat', 47)">
+          Add to cart
+        </button>
+      </div>
+      <div class="item-container">
+        <div class="item"><a href="./products/3.html"><img class="image" src="images/hat03.jpg" alt="donegal" /></a>
+        </div>
+        <div>$33</div>
+        <button class="button-add" type="button" onclick="addToCart('donegal', 33)">
+          Add to cart
+        </button>
+      </div>
+      <div class="item-container">
+        <div class="item"><a href="./products/4.html"><img class="image" src="images/hat04.jpg" alt="fedora" /></a>
+        </div>
+        <div>$41</div>
+        <button class="button-add" type="button" onclick="addToCart('fedora', 41)">
+          Add to cart
+        </button>
+      </div>
+    </div>
+  </article>
+  <script>
+
+    const user = getUser(); // se define el usario para asociarlo al email
+    pe.setPerson({email:user.email}); 
+    updateCartView('cart');
+    // se define el evento addToCart para capturar los elementos agregados al carrito
+    async function addToCart(itemName, price) {
+      addItemToCart(itemName, price);
+      updateCartView('cart');
+      await pe.track('agregarcarrito', { item: itemName, price: price, quantity: 1 });
+      
+      
+      // const user = getUser();
+      // if (user && user.email) {
+      //     window.dataLayer.push({'product_name': itemName, 'product_price': price, 'qty': 1, 'event': 'add_to_cart'});
+      //     console.log('Item Added to Cart');
+      //   await pe.track('add_tcart', { item: itemName, price: price, quantity: 1 });
+      // } else {
+      //   await pe.track('demoViewItem', { itemCategory: 'test', itemPrice: price, itemName });
+      // }
+    }
+
+    async function logout() {
+      window.dataLayer.push({'user_id': '','event': 'logout'});
+      console.log('User Logged Out');
+      await pe.track('logout'); // your custom event
+      await pe.forgetPerson();
+      removeUser();
+      setTimeout(() => window.location = './', 3000)
+    }
+
+
+    (async () => {
+      const registrationLink = document.querySelector('.delink-registration');
+      const loginLink = document.querySelector('.delink-login');
+      const logoutLink =  document.querySelector('.delink-logout');
+      logoutLink.style.display = 'none';
+
+      const user = getUser();
+      if (user && user.email) {
+        registrationLink.style.display = 'none';
+        loginLink.style.display = 'none';
+        logoutLink.style.display = 'inline';
+      }
+      updateCartView('cart');
+    })();
+  </script>
+</body>
+
+</html>

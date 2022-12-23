@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<title>Magic Shop. Checkout</title>
+
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+  <meta content="utf-8" http-equiv="encoding" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="text/javascript" src="utils.js"></script>
+  
+   <!-- GTM Datalayer init -->
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  </script>
+  
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MJKZ658');</script>
+  <!-- End Google Tag Manager -->
+  
+</head>
+
+<body>
+  
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJKZ658"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  
+  <header class="header">
+    <div class="fake-counter"></div>
+    <a class="delink" href="./">
+      <h1>Magic shop</h1>
+    </a>
+    <div class="counter">
+      <a class="delink" id="cart" href="./checkout.html">empty cart</a>
+    </div>
+  </header>
+  <article class="cart-content">
+    <div class="checkout">
+      <h2>Cart</h2>
+      <div class="cart-items">
+      </div>
+      <div class="cart-total">
+        <div class="cart-item">
+          <div class="cart-item-name">total:</div>
+          <div class="cart-item-price total"></div>
+        </div>
+      </div>
+      <div class="payment">
+        <h2>Payment</h2>
+        <div>
+          <input class="checkout-card-input" type="text" placeholder="card number" />
+        </div>
+        <div class="checkout-card-details">
+          <input class="checkout-month-input" type="text" placeholder="month" />
+          <input class="checkout-year-input" type="text" placeholder="year" />
+          <input class="checkout-cvv-input" type="password" placeholder="cvv" />
+        </div>
+        <button class="checkout-button-pay" type="button" onclick="pay()">
+          Pay
+        </button>
+        <button class="checkout-button-pay" type="button" onclick="cancel_order()">
+          Cancel
+        </button>
+      </div>
+  </article>
+  <script>
+    (async () => {
+      updateCartView('cart');
+      const cart = getCart();
+      if (!cart) {
+        return;
+      }
+      const cartItemsContainer = document.querySelector('.cart-items');
+      
+      cart.items.map(item => {
+        const cartItem = document.createElement("div");
+        cartItem.classList.add('cart-item');
+        const cartItemName = document.createElement("div");
+        cartItemName.innerText = `${item.name} x ${item.quantity}`;
+        cartItemName.classList.add('cart-item-name');
+        const cartItemPrice = document.createElement("div");
+        cartItemPrice.innerText = `$${item.price * item.quantity}`;
+        cartItemPrice.classList.add('cart-item-price');
+  
+        cartItem.appendChild(cartItemName);
+        cartItem.appendChild(cartItemPrice);
+  
+        cartItemsContainer.appendChild(cartItem);
+      });
+  
+      const total = document.querySelector('.total');
+      total.innerText = `$${cart.totalPrice}`;
+      window.dataLayer.push({'total': cart.totalPrice});
+    })()
+
+    async function pay() {
+      setTimeout(() => window.location = './success.html', 3000); 
+    }
+    
+    async function cancel_order() {
+      window.dataLayer.push({'event': 'cancel_order'});
+      console.log('Cart dropped');
+      removeCart();
+      setTimeout(() => window.location = './', 3000); 
+    }
+  </script>
+</body>
+
+</html>

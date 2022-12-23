@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<title>Magic Shop. Sign Up</title>
+
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+  <meta content="utf-8" http-equiv="encoding" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="text/javascript" src="utils.js"></script>
+  
+   <!-- GTM Datalayer init -->
+  <!-- <script>
+  window.dataLayer = window.dataLayer || [];
+  </script> -->
+  
+<!-- Google Tag Manager -->
+<!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MJKZ658');</script> -->
+  <!-- End Google Tag Manager -->
+
+  <script>
+    (function(e,t,n,o){e.PeopleEventsObject=o;e[o]=e[o]||{init:function(t){e[o].apiKey=t},
+    setPerson:function(t,n){e[o].person=t;e[o].personTtl=n},
+    forgetPerson:function(){e[o].toForgetPerson=true},
+    track:function(){(e[o].q=e[o].q||[]).push(arguments)},
+    updatePerson:function(t){e[o].personToUpdate={person:t}},
+    appendToList:function(t,n){e[o].attributeToAppend={attributeName:t,attribute:n}}};
+    var r=t.createElement("script");
+    var s=t.getElementsByTagName("script")[0];r.async=1;r.src=n;s.parentNode.insertBefore(r,s)})
+    (window,document,'https://s3.eu-central-1.amazonaws.com/portal-cdn-production/people-events-sdk/pe.latest-2.js','pe');
+    
+    pe.init('67b9a58c644e9b8e1e9699b56c50d80d-0589d58f-8f0c-4327-bbbc-e8e8356945bc');
+    </script>
+
+  
+</head>
+
+<body>
+  
+<!-- Google Tag Manager (noscript) -->
+<!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJKZ658"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
+  <!-- End Google Tag Manager (noscript) -->
+  
+  <header class="header">
+    <div class="fake-counter"></div>
+    <h1>Magic shop</h1>
+    <div class="counter" id="counter"></div>
+  </header>
+  <article class="register-content" id="registration">
+    <div class="field-container">
+      <div class="field">First name:</div>
+      <input class="input" id="firstName" />
+    </div>
+    <div class="field-container">
+      <div class="field">Last name:</div>
+      <input class="input" id="lastName" />
+    </div>
+    <div class="field-container">
+      <div class="field">Email:</div>
+      <input class="input" id="email" />
+    </div>
+    <div class="field-container">
+      <div class="field">Phone:</div>
+      <input class="input" id="phone" />
+    </div>
+    <button class="button-register" onclick="register()" type="button">Sign Up</button>
+  </article>
+  <script>
+    async function register() {
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+
+
+       
+
+     
+      //const onRegistrationFormSubmit = async (evt) => {
+    //evt.preventDefault();
+    /* ... */
+        //await pe.setPerson({email:email});
+        //await pe.track('registration');
+        //await pe.updatePerson({ firstName: firstName, lastName: lastName, contactInformation:{phone:[{number: phone}]}});
+//};
+ 
+// const registrationForm = document.querySelector('form');
+// registrationForm.addEventListener('submit', onRegistrationFormSubmit);
+
+
+               
+      const person = {
+        firstName,
+        lastName,
+        email,
+        phone,
+           
+      };
+
+      localStorage.setItem ( 'person',  JSON.stringify(person));
+      await pe.setPerson({email:email});
+      await pe.track('registration');
+      await pe.updatePerson({ firstName: firstName, lastName: lastName, contactInformation:{phone:[{number: phone}]}});
+
+
+      // saveUser(person);
+      
+      // window.dataLayer.push({'user_id': email, 'last_name':lastName, 'first_name':firstName, 'event': 'signup'});
+      // console.log('User Signed Up');
+      
+      
+      setTimeout(() => { window.location = './' }, 3000);
+    }
+
+  </script>
+</body>
+
+</html>

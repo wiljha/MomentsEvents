@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<title>Magic Shop. Order Completed</title>
+
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+  <meta content="utf-8" http-equiv="encoding" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="text/javascript" src="utils.js"></script>
+  
+   <!-- GTM Datalayer init -->
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  </script>
+  
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MJKZ658');</script>
+  <!-- End Google Tag Manager -->
+  
+</head>
+
+<body>
+  
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MJKZ658"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  
+  <header class="header">
+    <div class="fake-counter"></div>
+    <a class="delink" href="./">
+      <h1>Magic shop</h1>
+    </a>
+    <div class="counter"></div>
+  </header>
+  <article class="thanks-content">
+    <div class="thanks-first">Thank you for shopping with us!</div>
+    <div class="thanks-second">You are welcome any time.</div>
+    <div class="thanks-back">
+      <button type="button" onclick="backToShopping()">
+        Back to Shopping
+      </button>
+      <button type="button" onclick="exit()">
+        Exit
+      </button>
+    </div>
+  </article>
+  <script>
+    (async () => {
+      const user = getUser();
+      const cart = getCart();
+      if (user && user.email) {
+         window.dataLayer.push({'user_id': user.email, 'event': 'login'});
+      }
+
+      window.dataLayer.push({'total': cart.totalPrice, 'event': 'checkout'});
+      console.log('Checkout Completed');
+      
+      removeCart();
+    })();
+
+    async function exit() {
+      window.dataLayer.push({'user_id': '','event': 'logout'});
+      console.log('User Logged Out');
+      removeUser();
+     
+      setTimeout(() => window.location = './', 3000); 
+    }
+
+    function backToShopping() {
+      window.location = './';
+    }
+  </script>
+</body>
+
+</html>
