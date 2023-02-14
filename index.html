@@ -37,11 +37,14 @@
     
     pe.init('67b9a58c644e9b8e1e9699b56c50d80d-0589d58f-8f0c-4327-bbbc-e8e8356945bc');
     </script>
-  
+   <script>
   import {InfobipRTC} from "infobip-rtc"; 
-  <script src="//rtc.cdn.infobip.com/1.14.9/infobip.rtc.js"></script>
+      <script src="//rtc.cdn.infobip.com/1.14.9/infobip.rtc.js"></script>
+    </script>
+ 
   
   <script>
+    
   let token = obtainToken(); // here you call '/webrtc/1/token'
   let options = {debug: true}
   let infobipRTC = new InfobipRTC(token, options);
