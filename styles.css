@@ -227,10 +227,10 @@
 }
 
 .container{
-  height:90px;
-  width: 90px;
+  height:100px;
+  width: 100px;
 }
 img {
- width : 90%;
- height: 90%; 
+ width : 100%;
+ height: 100%; 
 }
