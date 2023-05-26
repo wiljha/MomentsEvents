@@ -87,8 +87,8 @@
 }
 
 .image {
-  width: 90px;
-  height: 90px;
+  width: auto;
+  height: 100%;
 }
 
 .button-add {
@@ -225,12 +225,3 @@
 .thanks-second {
   font-size: 28px;
 }
-
-//.container{
-// height:100px;
-//  width: 100px;
-//}
-//img {
-//width : 100%;
-// height: 100%; 
-// }
